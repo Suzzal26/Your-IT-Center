@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import LogoImg from "../assets/logo.png";
+import LogoImg from "../assets/logo.png"; // Ensure this is the new Star Link Center logo
 import Notify from "../components/Alert";
 import { register } from "../services/users";
 import AddressMapPicker from "../components/AddressMapPicker";

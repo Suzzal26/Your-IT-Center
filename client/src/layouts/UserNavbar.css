@@ -1,6 +1,6 @@
 /* Overall Navbar Styling */
 .modern-navbar {
-  background-color: #1a73e8; /* Professional Blue */
+  background-color: #111111; /* Deep black */
   padding: 1rem 0;
   position: sticky;
   top: 0;
@@ -27,7 +27,7 @@
 
 /* Navigation Links */
 .nav-link {
-  color: #ffffff;
+  color: #ffffff !important;
   font-weight: 500;
   margin: 0 0.5rem;
   padding: 0.5rem 1rem;
@@ -50,14 +50,14 @@
 }
 
 .dropdown-item {
-  color: #333;
+  color: #222222;
   padding: 0.75rem 1.25rem;
   transition: background-color 0.2s ease;
 }
 
 .dropdown-item:hover {
-  background-color: #f8f9fa;
-  color: #1a73e8;
+  background-color: #f4f4f4;
+  color: #111111;
 }
 
 /* Submenu */
@@ -167,4 +167,8 @@
 
 .guest-welcome {
   color: #fff;
+}
+
+span {
+  color: #ffffff !important;
 }

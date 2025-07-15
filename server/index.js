@@ -22,7 +22,7 @@ const app = express();
 // ✅ Middleware Setup
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173", // ✅ Production-ready: dynamic origin
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -47,8 +47,11 @@ const productRoutes = require("./modules/products/productRoutes");
 const searchRoutes = require("./modules/search/searchRoutes");
 const contactRoutes = require("./modules/contact/contactRoutes");
 const userRoutes = require("./modules/users/user.route");
-const orderRoutes = require("./routes/orderRoutes"); // 🆕
 
+// ✅ 🆕 Import Order Routes (this is the only change)
+const orderRoutes = require("./routes/orderRoutes");
+
+// ✅ Validate and Register Routes
 const routeMappings = {
   "/api/v1/auth": authRoutes,
   "/api/v1/admin": adminRoutes,
@@ -56,7 +59,7 @@ const routeMappings = {
   "/api/v1/search": searchRoutes,
   "/api/v1/contact": contactRoutes,
   "/api/v1/users": userRoutes,
-  "/api/v1/orders": orderRoutes,
+  "/api/v1/orders": orderRoutes, // 🆕 Register order routes here
 };
 
 for (const [route, handler] of Object.entries(routeMappings)) {
@@ -67,20 +70,20 @@ for (const [route, handler] of Object.entries(routeMappings)) {
   app.use(route, handler);
 }
 
+// ✅ Debug Registered Routes
 console.log("🛠 Registered API Routes:");
 app._router.stack.forEach((layer) => {
   if (layer.route) {
-    console.log(`➡️ ${Object.keys(layer.route.methods).join(", ").toUpperCase()} ${layer.route.path}`);
+    console.log(
+      `➡️ ${Object.keys(layer.route.methods).join(", ").toUpperCase()} ${layer.route.path}`
+    );
   }
 });
 
-// ✅ MongoDB Atlas Connection
+// ✅ MongoDB Connection
 mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("✅ Connected to MongoDB Atlas"))
+  .connect(MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err.message);
     setTimeout(() => process.exit(1), 5000);
@@ -91,7 +94,7 @@ app.use("*", (req, res) =>
   res.status(404).json({ error: "API Route Not Found" })
 );
 
-// ✅ Start Server
+// ✅ Start the Server
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );

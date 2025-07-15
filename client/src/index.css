@@ -1,13 +1,13 @@
 /* Modern Ecommerce Design System */
 :root {
   /* Color Palette */
-  --primary-color: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-light: #3b82f6;
-  --secondary-color: #f59e0b;
-  --secondary-dark: #d97706;
-  --accent-color: #10b981;
-  --accent-dark: #059669;
+  --primary-color: #111111;
+  --primary-dark: #000000;
+  --primary-light: #333333;
+  --secondary-color: #bbbbbb;
+  --secondary-dark: #888888;
+  --accent-color: #222222;
+  --accent-dark: #444444;
 
   /* Neutral Colors */
   --white: #ffffff;

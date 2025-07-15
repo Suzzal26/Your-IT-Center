@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import LogoImg from "../assets/logo.png";
+import LogoImg from "../assets/logo.png"; // Ensure this is the new Star Link Center logo
 import Notify from "../components/Alert";
 import { resetPassword } from "../services/users";
 import "./ResetPassword.css";

@@ -10,7 +10,7 @@ import {
   FaBars,
 } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo.png"; // Ensure this is the new Star Link Center logo
 import { isLoggedIn, logout } from "../utils/login";
 import { CartContext } from "../contexts/CartContext";
 import { categories } from "../constants";
@@ -52,7 +52,7 @@ const UserNavbar = () => {
             alt="Logo"
             className="me-3 logo-img"
           />
-          <span>Your IT Center</span>
+          <span>Star Link Center</span>
         </Link>
 
         {/* Mobile Menu Toggle */}

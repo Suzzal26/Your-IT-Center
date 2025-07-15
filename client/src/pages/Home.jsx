@@ -204,9 +204,6 @@ const Home = () => {
                     <div className="product-info-main">
                       <h5 className="product-name-main">{product.name}</h5>
                       <p className="product-price-main">Rs. {product.price}</p>
-                      <span className="product-category-tag">
-                        {product.category}
-                      </span>
                       <Link
                         to={`/products/${product._id}`}
                         className="btn btn-outline-primary w-100"

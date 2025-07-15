@@ -6,7 +6,7 @@ import {
   FaPhoneAlt,
   FaEnvelope,
 } from "react-icons/fa";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo.png"; // Ensure this is the new Star Link Center logo
 import { categories } from "../constants";
 import "./UserFooter.css";
 
@@ -20,7 +20,7 @@ const UserFooter = () => {
           {/* Column 1: About */}
           <div className="col-lg-3 col-md-6 mb-4">
             <div className="footer-about">
-              <img src={Logo} alt="Your IT Center" className="footer-logo" />
+              <img src={Logo} alt="Star Link Center" className="footer-logo" />
               <p>
                 Your trusted partner for IT solutions, repairs, and maintenance
                 services in Kathmandu Valley.
@@ -111,7 +111,7 @@ const UserFooter = () => {
         <div className="row">
           <div className="col-12 text-center footer-bottom">
             <p>
-              &copy; {new Date().getFullYear()} Your IT Center. All rights
+              &copy; {new Date().getFullYear()} Star Link Center. All rights
               reserved.
             </p>
           </div>

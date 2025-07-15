@@ -1,7 +1,7 @@
 import { Dropdown } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { removeToken } from "../utils/token";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo.png"; // Ensure this is the new Star Link Center logo
 
 const AdminNavbar = () => {
   const navigate = useNavigate();

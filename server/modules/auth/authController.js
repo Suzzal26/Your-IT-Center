@@ -1,8 +1,7 @@
 const AuthService = require("./authService"); // ✅ Keep this
-const User = require("../users/user.model"); 
+const User = require("../users/user.model");
 const generateAuthToken = require("./authService").generateAuthToken; // ✅ Add this line
 const jwt = require("jsonwebtoken");
-
 
 const bcrypt = require("bcryptjs");
 
@@ -25,7 +24,9 @@ const transporter = nodemailer.createTransport({
 // 🟢 Register User & Send Verification Email
 exports.register = async (req, res) => {
   try {
-    const { user, token, verificationToken } = await AuthService.registerUser(req.body);
+    const { user, token, verificationToken } = await AuthService.registerUser(
+      req.body
+    );
 
     if (!token) {
       console.error("❌ Token generation failed in register");
@@ -46,7 +47,7 @@ exports.register = async (req, res) => {
       let info = await transporter.sendMail({
         from: process.env.EMAIL_FROM,
         to: user.email,
-        subject: "Verify Your Email - Your IT Center",
+        subject: "Verify Your Email - Star Link Center",
         html: `<p>Click the link below to verify your email:</p>
                <a href="${verificationLink}">${verificationLink}</a>
                <p>If you didn't register, please ignore this email.</p>`,
@@ -55,7 +56,11 @@ exports.register = async (req, res) => {
       console.log(`✅ Email sent to ${user.email}: ${info.messageId}`);
     } catch (emailError) {
       console.error("❌ Email sending failed:", emailError);
-      return res.status(500).json({ error: "Failed to send verification email. Please try again later." });
+      return res
+        .status(500)
+        .json({
+          error: "Failed to send verification email. Please try again later.",
+        });
     }
 
     res.status(201).json({
@@ -78,11 +83,16 @@ exports.verifyEmail = async (req, res) => {
     const result = await AuthService.verifyEmail(token);
 
     if (!result || !result.user) {
-      return res.status(400).json({ error: "Invalid or expired verification token." });
+      return res
+        .status(400)
+        .json({ error: "Invalid or expired verification token." });
     }
 
     // ✅ Corrected line: use result.user
-    const loginToken = await AuthService.generateAuthToken(result.user._id, result.user.role);
+    const loginToken = await AuthService.generateAuthToken(
+      result.user._id,
+      result.user.role
+    );
 
     res.cookie("token", loginToken, {
       httpOnly: true,
@@ -92,7 +102,8 @@ exports.verifyEmail = async (req, res) => {
     });
 
     res.status(200).json({
-      message: result.message || "Email verified successfully. You can now log in.",
+      message:
+        result.message || "Email verified successfully. You can now log in.",
       user: result.user,
       token: loginToken,
     });
@@ -101,8 +112,6 @@ exports.verifyEmail = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-
 
 // 🟢 Login User
 // 🟢 Login User
@@ -113,7 +122,9 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required." });
+      return res
+        .status(400)
+        .json({ error: "Email and password are required." });
     }
 
     const user = await User.findOne({ email }).select("+password +isVerified");
@@ -128,12 +139,18 @@ exports.login = async (req, res) => {
     }
 
     if (!user.isVerified) {
-      return res.status(403).json({ error: "Please verify your email before logging in." });
+      return res
+        .status(403)
+        .json({ error: "Please verify your email before logging in." });
     }
 
-    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
 
     console.log("✅ Login Successful, Token Generated:", token); // Debugging Log
 
@@ -144,8 +161,6 @@ exports.login = async (req, res) => {
   }
 };
 
-
-
 // 🟢 Forgot Password - Send OTP
 exports.forgotPassword = async (req, res) => {
   try {
@@ -154,7 +169,7 @@ exports.forgotPassword = async (req, res) => {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: "Password Reset OTP - Your IT Center",
+      subject: "Password Reset OTP - Star Link Center",
       text: `Your OTP code is: ${otp}. This code is valid for 10 minutes.`,
     });
 
@@ -170,7 +185,9 @@ exports.resetPassword = async (req, res) => {
   try {
     const { email, otp, newPassword } = req.body;
     await AuthService.resetPassword(email, otp, newPassword);
-    res.status(200).json({ message: "Password reset successful. You can now log in." });
+    res
+      .status(200)
+      .json({ message: "Password reset successful. You can now log in." });
   } catch (error) {
     console.error("❌ Error in reset password:", error);
     res.status(400).json({ error: error.message });

@@ -54,9 +54,9 @@ exports.sendOrderConfirmationEmail = async (email, orderId) => {
   `;
 
   await transporter.sendMail({
-    from: `"Your IT Center" <${process.env.EMAIL_FROM}>`,
+    from: `"Star Link Center" <${process.env.EMAIL_FROM}>`,
     to: email,
-    subject: "Order Confirmed - Your IT Center",
+    subject: "Order Confirmed - Star Link Center",
     html: message,
   });
 };

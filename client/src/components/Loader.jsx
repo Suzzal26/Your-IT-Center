@@ -1,5 +1,5 @@
 import React from "react";
-import LogoImg from "../assets/logo.png";
+import LogoImg from "../assets/logo.png"; // Ensure this is the new Star Link Center logo
 import "./Loader.css";
 
 export const BlogLoader = () => {

@@ -1,11 +1,12 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 .about-us-wrapper {
-  background: url('../assets/AboutFood.jpg') no-repeat center center fixed; 
+  background: url("../assets/AboutFood.jpg") no-repeat center center fixed;
   background-size: cover;
   padding: 20px;
   min-height: 100vh;
@@ -24,9 +25,9 @@ html, body {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background-color: rgba(175, 255, 159, 0.856);
+  background-color: rgba(255, 215, 0, 0.18);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Keep shadow only for green box */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Keep shadow only for golden box */
 }
 
 .content-section h1 {
